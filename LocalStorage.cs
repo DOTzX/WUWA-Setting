@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Data.SQLite;
 
-namespace WUWA_Tweaker {
-    public class LocalStorageEntry {
-        public string Key { get; set; }
-        public string Value { get; set; }
+namespace WUWA_Setting {
+    internal class LocalStorageEntry {
+        internal string Key { get; set; }
+        internal string Value { get; set; }
     }
 
     // Insert or Update
@@ -25,12 +21,12 @@ namespace WUWA_Tweaker {
     //    Console.WriteLine($"Key: {e.Key}, Value: {e.Value}");
     //}
 
-    public class LocalStorageRepository {
+    internal class LocalStorageRepository {
         private readonly string _connectionString;
-        public LocalStorageRepository (string databasePath) {
+        internal LocalStorageRepository (string databasePath) {
             _connectionString = $"Data Source={databasePath};Version=3;";
         }
-        public void InsertOrUpdate (LocalStorageEntry entry) {
+        internal void InsertOrUpdate (LocalStorageEntry entry) {
             using (var connection = new SQLiteConnection(_connectionString)) {
                 connection.Open();
                 string query = @"
@@ -45,7 +41,7 @@ namespace WUWA_Tweaker {
                 }
             }
         }
-        public LocalStorageEntry GetByKey (string key) {
+        internal LocalStorageEntry GetByKey (string key) {
             using (var connection = new SQLiteConnection(_connectionString)) {
                 connection.Open();
                 string query = "SELECT key, value FROM LocalStorage WHERE key = @key";
@@ -65,7 +61,7 @@ namespace WUWA_Tweaker {
 
             return null;
         }
-        public List<LocalStorageEntry> GetAll () {
+        internal List<LocalStorageEntry> GetAll () {
             var entries = new List<LocalStorageEntry>();
 
             using (var connection = new SQLiteConnection(_connectionString)) {

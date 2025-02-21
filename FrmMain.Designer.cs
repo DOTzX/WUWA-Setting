@@ -1,4 +1,4 @@
-﻿namespace WUWA_Tweaker
+﻿namespace WUWA_Setting
 {
     partial class FrmMain
     {
@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.lblDir = new System.Windows.Forms.Label();
             this.txtDir = new System.Windows.Forms.TextBox();
-            this.btnLocate = new System.Windows.Forms.Button();
+            this.btnChange = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnLaunch = new System.Windows.Forms.Button();
+            this.btnOpen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDir
@@ -49,17 +51,18 @@
             this.txtDir.Location = new System.Drawing.Point(15, 25);
             this.txtDir.Name = "txtDir";
             this.txtDir.ReadOnly = true;
-            this.txtDir.Size = new System.Drawing.Size(415, 20);
+            this.txtDir.Size = new System.Drawing.Size(322, 20);
             this.txtDir.TabIndex = 1;
             // 
-            // btnLocate
+            // btnChange
             // 
-            this.btnLocate.Location = new System.Drawing.Point(436, 25);
-            this.btnLocate.Name = "btnLocate";
-            this.btnLocate.Size = new System.Drawing.Size(88, 23);
-            this.btnLocate.TabIndex = 2;
-            this.btnLocate.Text = "Locate";
-            this.btnLocate.UseVisualStyleBackColor = true;
+            this.btnChange.Location = new System.Drawing.Point(343, 25);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(88, 23);
+            this.btnChange.TabIndex = 2;
+            this.btnChange.Text = "Change";
+            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
             // btnApply
             // 
@@ -69,6 +72,7 @@
             this.btnApply.TabIndex = 3;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // btnLaunch
             // 
@@ -78,22 +82,35 @@
             this.btnLaunch.TabIndex = 4;
             this.btnLaunch.Text = "Launch Wuthering Waves";
             this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.Location = new System.Drawing.Point(436, 25);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(88, 23);
+            this.btnOpen.TabIndex = 5;
+            this.btnOpen.Text = "Open";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 156);
+            this.ClientSize = new System.Drawing.Size(536, 161);
+            this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnLaunch);
             this.Controls.Add(this.btnApply);
-            this.Controls.Add(this.btnLocate);
+            this.Controls.Add(this.btnChange);
             this.Controls.Add(this.txtDir);
             this.Controls.Add(this.lblDir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WUWA Tweaker";
+            this.Text = "WUWA Setting";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -104,9 +121,10 @@
 
         private System.Windows.Forms.Label lblDir;
         private System.Windows.Forms.TextBox txtDir;
-        private System.Windows.Forms.Button btnLocate;
+        private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnLaunch;
+        private System.Windows.Forms.Button btnOpen;
     }
 }
 
