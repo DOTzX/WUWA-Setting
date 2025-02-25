@@ -394,11 +394,21 @@ namespace WUWA_Setting {
             }
 
             if (isChangeDetected) Utilities.ApplyLocalStorage(WUWA_DIR);
+
+            MessageBox.Show("Applied !", "Setting", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void btnLaunch_Click (object sender, EventArgs e) {
             if (Utilities.IsGameRunning()) {
                 MessageBox.Show("Wuthering Waves are still running, please close it first.");
                 return;
+            }
+
+            foreach (SettingStructure stgStc in settingDataList) {
+                bool isChanged = stgStc.Value != stgStc.OldValue;
+                if (isChanged) {
+                    MessageBox.Show("Setting are not applied, please apply first.");
+                    return;
+                }
             }
 
             List<string> list = new List<string>() { "Client" };
