@@ -47,6 +47,7 @@ namespace WUWA_Setting {
             txtDir.Text = WUWA_DIR;
             Console.WriteLine($"WUWA_DIR: {WUWA_DIR}");
 
+            DeleteAddedButtons();
             InitializeButtons((bool) Utilities.ReadLocalStorage(WUWA_DIR, ref settingDataList, ref localStorageRepository));
         }
         private void InitializeMenuStrip () {
@@ -54,24 +55,28 @@ namespace WUWA_Setting {
             this.MainMenuStrip = menuStrip;
             this.Controls.Add(menuStrip);
 
+            #region MenuItem
             ToolStripMenuItem fileMenu = new ToolStripMenuItem("File");
             menuStrip.Items.Add(fileMenu);
 
             ToolStripMenuItem optionMenu = new ToolStripMenuItem("Option");
             menuStrip.Items.Add(optionMenu);
 
+            ToolStripMenuItem helpMenu = new ToolStripMenuItem("Help");
+            menuStrip.Items.Add(helpMenu);
+            #endregion
+
+            #region MenuItem.File
             ToolStripMenuItem checkUpdateMenuItem = new ToolStripMenuItem("Check for Updates");
             checkUpdateMenuItem.Click += async (s, ev) => await Utilities.CheckForUpdate();
             fileMenu.DropDownItems.Add(checkUpdateMenuItem);
 
-            ToolStripMenuItem openGitHubMenuItem = new ToolStripMenuItem("Visit GitHub Repo");
-            openGitHubMenuItem.Click += (s, ev) => Utilities.OpenGitHubRepo();
-            fileMenu.DropDownItems.Add(openGitHubMenuItem);
-
             ToolStripMenuItem exitAppMenuItem = new ToolStripMenuItem("Exit");
             exitAppMenuItem.Click += (s, ev) => Application.Exit();
             fileMenu.DropDownItems.Add(exitAppMenuItem);
+            #endregion
 
+            #region MenuItem.Option
             runDx11MenuItem = new ToolStripMenuItem("Launch with DirectX 11 (RT will be disabled)") {
                 CheckOnClick = true
             };
@@ -79,19 +84,34 @@ namespace WUWA_Setting {
             runDx11MenuItem.CheckedChanged += RunDX11_CheckedChanged;
             optionMenu.DropDownItems.Add(runDx11MenuItem);
 
-            forceRtMenuItem = new ToolStripMenuItem("Force use RT module without relaunch game (Supported GPU only)") {
+            forceRtMenuItem = new ToolStripMenuItem("Enable RT module without restarting game (Supported GPU only)") {
                 CheckOnClick = true
             };
             forceRtMenuItem.Checked = Properties.Settings.Default.ForceRT;
             forceRtMenuItem.CheckedChanged += ForceRT_CheckedChanged;
             optionMenu.DropDownItems.Add(forceRtMenuItem);
 
-            exitAppOnLaunchMenuItem = new ToolStripMenuItem("Exit application after Launching Wuthering Waves") {
+            exitAppOnLaunchMenuItem = new ToolStripMenuItem("Exit application after launching Wuthering Waves") {
                 CheckOnClick = true
             };
             exitAppOnLaunchMenuItem.Checked = Properties.Settings.Default.ExitAppOnLaunch;
             exitAppOnLaunchMenuItem.CheckedChanged += ExitAppOnLaunch_CheckedChanged;
             optionMenu.DropDownItems.Add(exitAppOnLaunchMenuItem);
+            #endregion
+
+            #region MenuItem.Help
+            ToolStripMenuItem openGitHubMenuItem = new ToolStripMenuItem("Visit GitHub");
+            openGitHubMenuItem.Click += (s, ev) => Utilities.OpenUrl("https://github.com/DOTzX/WUWA-Setting");
+            helpMenu.DropDownItems.Add(openGitHubMenuItem);
+
+            ToolStripMenuItem openSaweriaMenuItem = new ToolStripMenuItem("Support me on Saweria (Indonesian)");
+            openSaweriaMenuItem.Click += (s, ev) => Utilities.OpenUrl("https://saweria.co/dotx");
+            helpMenu.DropDownItems.Add(openSaweriaMenuItem);
+
+            ToolStripMenuItem openKoFiMenuItem = new ToolStripMenuItem("Support me on Ko-Fi (International)");
+            openKoFiMenuItem.Click += (s, ev) => Utilities.OpenUrl("https://ko-fi.com/dotx_exe");
+            helpMenu.DropDownItems.Add(openKoFiMenuItem);
+            #endregion
         }
         private void InitializeButtons (bool addSettingButton = true) {
             int betweenSideGap = 10;
@@ -174,12 +194,13 @@ namespace WUWA_Setting {
             btnOpen.Enabled = Directory.Exists(WUWA_DIR);
         }
         private void DeleteAddedButtons () {
-            foreach (Control ctrl in this.Controls.OfType<Button>().Where(c => c.Name.StartsWith("DynamicButton_")).ToList()) {
-                this.Controls.Remove(ctrl);
-                ctrl.Dispose();
+            List<SettingButton> listAddedButtons = this.Controls.OfType<SettingButton>().Where(c => c.Name.StartsWith("DynamicButton_")).ToList();
+            if (listAddedButtons.Count > 0) {
+                foreach (SettingButton ctrl in listAddedButtons) {
+                    this.Controls.Remove(ctrl);
+                    ctrl.Dispose();
+                }
             }
-
-            InitializeButtons(false);
         }
         private void ButtonState (SettingStructure stgStc) {
             string buttonText = stgStc.Value.ToString();
@@ -320,7 +341,7 @@ namespace WUWA_Setting {
             foreach (SettingStructure stgStc in settingDataList) {
                 bool isChanged = stgStc.Value != stgStc.OldValue;
 
-                switch (stgStc.Name) { // overwriting each game execution.
+                switch (stgStc.Name) { // overwriting each setting applied
                     case "RayTracing":
                         bool isEnabled = ( (int) stgStc.Value ) > 0;
 

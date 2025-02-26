@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WUWA_Setting {
-    class Utilities {
+    internal class Utilities {
         private static string registryPath = @"Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache";
         private static string patternKey = @"(Client-Win64-Shipping\.exe\.FriendlyAppName|launcher\.exe\.FriendlyAppName)$";
         private static string expectedValue = "Wuthering Waves";
         private static string processName = "Client-Win64-Shipping";
         private static string updateUrl = "https://raw.githubusercontent.com/DOTzX/WUWA-Setting/refs/heads/master/Properties/AssemblyInfo.cs";
-        private static string repoUrl = "https://github.com/DOTzX/WUWA-Setting";
 
+        #region Core (Private)
         private static async Task<string> GetLatestVersion () {
             try {
                 using (HttpClient client = new HttpClient()) {
@@ -52,8 +52,9 @@ namespace WUWA_Setting {
             }
             return string.Empty;
         }
+        #endregion
 
-        #region Core
+        #region Core (Internal)
         internal static bool IsGpuSupportedByOfficial () {
             string gpuName = GetGPUName().ToLower();
             return ( gpuName.Contains("rtx 40") || gpuName.Contains("rtx 50") );
@@ -176,10 +177,10 @@ namespace WUWA_Setting {
                 MessageBox.Show("You are using the latest version.", "Update Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        internal static void OpenGitHubRepo () {
+        internal static void OpenUrl (string url) {
             try {
                 Process.Start(new ProcessStartInfo {
-                    FileName = repoUrl,
+                    FileName = url,
                     UseShellExecute = true
                 });
             } catch (Exception ex) {

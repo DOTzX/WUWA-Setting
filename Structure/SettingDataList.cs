@@ -34,7 +34,7 @@ namespace WUWA_Setting {
                             Name = "RayTracing",
                             Text = "Ray Tracing",
                             Value = 0,
-                            DataTypeOption = new List < string > { "Off", "Low", "Medium", "High" },
+                            DataTypeOption = new List<string> { "Off", "Low", "Medium", "High" },
                             IsNewColumn = true,
                         }
                     },
@@ -84,7 +84,7 @@ namespace WUWA_Setting {
                             Name = "NvidiaSuperSamplingQuality",
                             Text = "DLSS Resolution",
                             Value = 99,
-                            DataTypeOption = new List < string > { "Auto", "Ult. Perf", "Perf", "Balanced", "Quality", "Ult. Quality" },
+                            DataTypeOption = new List<string> { "Auto", "Ult. Perf", "Perf", "Balanced", "Quality", "Ult. Quality" },
                         }
                     },
                     // auto = 99, balanced = 0, rest is negative/positive
