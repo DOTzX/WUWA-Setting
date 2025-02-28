@@ -339,7 +339,7 @@ namespace WUWA_Setting {
             bool isChangeDetected = false;
 
             foreach (SettingStructure stgStc in settingDataList) {
-                bool isChanged = stgStc.Value != stgStc.OldValue;
+                bool isEquals = object.Equals(stgStc.Value, stgStc.OldValue);
 
                 switch (stgStc.Name) { // overwriting each setting applied
                     case "RayTracing":
@@ -374,7 +374,7 @@ namespace WUWA_Setting {
                         break;
                 }
 
-                if (isChanged) {
+                if (!isEquals) {
                     isChangeDetected = true;
                     Console.WriteLine($"DB_CHANGE: {stgStc.Name} | {stgStc.OldValue} => {stgStc.Value}");
 
@@ -425,8 +425,8 @@ namespace WUWA_Setting {
             }
 
             foreach (SettingStructure stgStc in settingDataList) {
-                bool isChanged = stgStc.Value != stgStc.OldValue;
-                if (isChanged) {
+                bool isEquals = object.Equals(stgStc.Value, stgStc.OldValue);
+                if (!isEquals) {
                     MessageBox.Show("Setting are not applied, please apply first.");
                     return;
                 }

@@ -17,13 +17,12 @@ Change in-game settings without opening the game.
 ## Download
 Download on [Release](https://github.com/DOTzX/WUWA-Setting/releases/latest) page.
 
-Online virus scanning = [VirusTotal.com](https://www.virustotal.com/gui/file/d3d7e92bf4c2f99566ac986fbcd0f6e43cf0b6d6f010c25b96520b3e2385df12)
+Online virus scanning = [VirusTotal.com](https://www.virustotal.com/gui/file/bb6c970e1ca5f99732932dd5180896d41b7eb80460678897755ac8d7583afca9) (2.1.0.4)
 
 You may also compile the application from its source code.
 
 ## Preview
-![image](https://github.com/user-attachments/assets/d58c2a81-33c3-4e11-b6d6-7a934388f467)
-![image](https://github.com/user-attachments/assets/b9442afd-8685-48e1-93fd-9c48105cb695)
+![image](https://github.com/user-attachments/assets/759f0359-4a6d-41cc-b19b-4d7adbb7ca61)
 
 ## Version
 
@@ -31,7 +30,7 @@ You may also compile the application from its source code.
 Reflected from Wuthering Waves 2.1
 
 ### App Version
-For example, WUWA Setting (this app) version is 2.1.0.2, which follows the format: Major.Minor.Build.Revision
+For example, WUWA Setting (this app) version is 2.1.0.4, which follows the format: Major.Minor.Build.Revision
 
 The "Major.Minor" follows the game's versioning system. (e.g. Wuthering Waves 2.1)
 
